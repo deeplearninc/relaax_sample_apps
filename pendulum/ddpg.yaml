@@ -1,0 +1,57 @@
+environment:
+  run: python environment/training.py
+  name: Pendulum-v0
+  shape: [3]
+  max_episodes: 10000
+  infinite_run: false
+
+relaax-metrics-server:
+  enable_unknown_metrics: True
+  metrics:
+    episode_reward: true
+    server_latency: false
+    action: false
+    critic: true
+
+  bind: localhost:7002
+  metrics_dir: logs/metrics
+  log_metrics_to_console: false
+  log_level: INFO
+
+relaax-parameter-server:
+  --bind: localhost:7000
+  --checkpoint-dir: logs/checkpoints
+  --log-level: INFO
+
+relaax-rlx-server:
+  --bind: localhost:7001
+  --log-level: INFO
+
+algorithm:
+  name: ddpg                      # short name for algorithm to load
+
+  input:
+    shape: [3]                    # shape of input state
+    history: 1                    # number of consecutive states to stack
+    use_convolutions: false       # set to true to process input by convolution layers
+
+  output:
+    continuous: true              # set to true to switch to continuous action space
+    action_size: 1                # action size for the given environment
+    scale: 2.0                    # multiplier to scale continuous output
+
+  hidden_sizes: [400, 300]        # list of dense layers sizes, for ex. [128, 64]
+  batch_size: 64                  # batch size, which needs for one networks update
+  buffer_size: 10000              # local buffer size to sample experience (400k-1m)
+  rewards_gamma: 0.99             # rewards discount factor
+
+  optimizer: Adam                 # name of optimizer to use within training
+  actor_learning_rate: 0.0001     # actor learning rate
+  critic_learning_rate: 0.001     # critic learning rate
+  tau: 0.001                      # rate of target updates
+
+  exploration:                    # exploration relevant parameters
+    ou_mu: 0.0
+    ou_theta: 0.15
+    ou_sigma: 0.20
+    tau: 25

@@ -1,0 +1,65 @@
+environment:
+  run: python environment/training.py
+  name: CartPole-v0
+  shape: [4]
+  max_episodes: 1000
+  infinite_run: false
+
+relaax-metrics-server:
+  enable_unknown_metrics: false
+  metrics:
+    episode_reward: true
+    server_latency: true
+    action: true
+    mu: true
+    sigma2: true
+    critic: true
+
+  bind: localhost:7002
+  metrics_dir: logs/metrics
+  log_metrics_to_console: false
+  log_level: INFO
+
+relaax-parameter-server:
+  --bind: localhost:7000
+  --checkpoint-dir: logs/checkpoints
+  --log-level: INFO
+
+relaax-rlx-server:
+  --bind: localhost:7001
+  --log-level: INFO
+
+algorithm:
+  name: trpo
+
+  subtype: trpo-d2
+
+  input:
+    shape: [4]
+    history: 1
+    use_convolutions: false
+
+  output:
+    continuous: false
+    action_size: 2                # action size for the given environment
+
+  hidden_sizes: [64, 64]
+  activation: tanh                # activation function for MLP
+  use_filter: false               # use average filter of the incoming observations and rewards
+  async: false                    # set to true to collect experience without blocking the updater
+
+  PG_OPTIONS:
+    timestep_limit: 200           # length in steps for one round in environment
+    n_iter: 10000                 # number of updates to pass through the training (training length)
+    timesteps_per_batch: 1000     # number of experience to collect before update
+    rewards_gamma: 0.995          # rewards discount factor
+    gae_lambda: 0.97              # lambda from generalized advantage estimation
+
+  TRPO:
+    cg_damping: 0.1               # multiple of the identity to Fisher matrix during CG
+    max_kl: 0.01                  # KL divergence between old and new policy
+
+  PPO:
+    clip_e: 0.2                   # clipping parameter for PPO loss function
+    learning_rate: 0.001          # learning rate for Adam optimizer used with PPO loss
+    n_epochs: 10                  # number of epochs to run on each batch

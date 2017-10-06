@@ -1,0 +1,43 @@
+environment:
+  run: python environment/training.py
+  name: CartPole-v0
+  shape: [4]
+  max_episodes: 1000
+  infinite_run: False
+
+relaax-metrics-server:
+  enable_unknown_metrics: False
+  metrics:
+    episode_reward: true
+    server_latency: false
+    action: false
+
+  bind: localhost:7002
+  metrics_dir: logs/metrics
+  log_metrics_to_console: false
+  log_level: INFO
+
+relaax-parameter-server:
+  --bind: localhost:7000
+  --checkpoint-dir: logs/checkpoints
+  --log-level: INFO
+
+relaax-rlx-server:
+  --bind: localhost:7001
+  --log-level: INFO
+
+algorithm:
+  name: policy_gradient         # name of the algorithm to load
+
+  input:
+    shape: [4]                  # shape of the incoming state from an environment
+    history: 1                  # number of consecutive states to stack for input
+    use_convolutions: false     # set to True to use convolution layers after input
+
+  output:
+    action_size: 2              # action size for the given environment
+
+  hidden_sizes: [10]            # list to define layers sizes after convolutions
+  batch_size: 200               # t_max for batch collection step size
+  learning_rate: 0.01           # learning rate for the optimizer
+  GAMMA: 0.99                   # rewards discount factor
