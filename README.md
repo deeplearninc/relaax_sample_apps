@@ -1,7 +1,7 @@
 # relaax_sample_apps
 Sample applications to demonstrate and test [RELAAX](https://github.com/deeplearninc/relaax/blob/master/README.md) abilities.
 
-## Contents
+## <a name="contents"></a>Contents
 - [Boxing](boxing/README.md)
     - [DA3C](boxing/README.md#da3c)
     - [DPPO](boxing/README.md#dppo)

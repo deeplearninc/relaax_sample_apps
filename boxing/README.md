@@ -1,6 +1,6 @@
 # relaax_sample_apps
 
-[Back to contents](../README.md)
+[Back to contents](../README.md#contents)
 
 BoxingDeterministic-v4 is an OpenAI Gym environment. This is classic Atari 2660 game. The observation is RGB image of screen. The action is discrete from [0, 17] range.
 
