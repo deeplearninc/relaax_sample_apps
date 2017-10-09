@@ -1,5 +1,3 @@
-# relaax_sample_apps
-
 [Back to contents](../README.md#contents)
 
 BoxingDeterministic-v4 is an OpenAI Gym environment. This is classic Atari 2660 game. The observation is RGB image of screen. The action is discrete from [0, 17] range.
@@ -8,4 +6,4 @@ BoxingDeterministic-v4 is an OpenAI Gym environment. This is classic Atari 2660 
 To run it navigate to this directory and start `relaax run -c da3c.yaml -n 8`.  It takes days to converge. Wait for 15M steps.  Use `tensorboard --logdir logs/metrics` to follow progress. At the end episode reward will be more than 60.
 
 ## <a name="dppo"></a>DPPO
-To run it navigate to this directory and start `relaax run -c dppo.yaml -n 8`. Wait for 200 episodes to complete. It will take about half of hour. Use `tensorboard --logdir logs/metrics` to follow progress. At the end episode reward will be 200 is most episodes.
+To run it navigate to this directory and start `relaax run -c dppo.yaml`. Wait for 200 episodes to complete. It will take about half of hour. Use `tensorboard --logdir logs/metrics` to follow progress. At the end episode reward will be 200 is most episodes.
