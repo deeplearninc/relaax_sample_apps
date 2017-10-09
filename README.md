@@ -13,7 +13,7 @@ Sample applications to demonstrate and test [RELAAX](https://github.com/deeplear
     - [TRPO](cartpole/README.md#trpo)
 - [Pendulum](pendulum/README.md)
     - [DA3C](pendulum/README.md#da3c)
-    - [DPPO](pendulum/README.md#dppo)
+    - [DPPG](pendulum/README.md#dppg)
 - [PixiCars](pixicars/README.md)
     - [DA3C](pixicars/README.md#da3c)
     - [DPPO](pixicars/README.md#dppo)
