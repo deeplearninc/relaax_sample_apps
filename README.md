@@ -10,7 +10,7 @@ Sample applications to demonstrate and test [RELAAX](https://github.com/deeplear
     - [DPPO](cartpole/README.md#dppo)
     - [DQN](cartpole/README.md#dqn)
     - [policy gradient](cartpole/README.md#policy-gradient)
-    - [TRPO](cartpole/README.md#trpo_group)
+    - [TRPO](cartpole/README.md#trpo)
 - [Pendulum](pendulum/README.md)
     - [DA3C](pendulum/README.md#da3c)
     - [DPPO](pendulum/README.md#dppo)
