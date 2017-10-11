@@ -11,6 +11,7 @@ Sample applications to demonstrate and test [RELAAX](https://github.com/deeplear
     - [DQN](cartpole/README.md#dqn)
     - [policy gradient](cartpole/README.md#policy-gradient)
     - [TRPO](cartpole/README.md#trpo)
+- [NIPS2017: Learning to run](nips-learning-to-run/README.md)
 - [Pendulum](pendulum/README.md)
     - [DA3C](pendulum/README.md#da3c)
     - [DPPG](pendulum/README.md#dppg)
