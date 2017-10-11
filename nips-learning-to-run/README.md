@@ -2,11 +2,11 @@
 
 # NIPS2017: Learning to run
 
-This app trains physiologically-based human model to navigate a complex obstacle course as quickly as possible. More details are [here](https://www.crowdai.org/challenges/nips-2017-learning-to-run).
+This application trains physiologically-based human model to navigate a complex obstacle course as quickly as possible. More details are [here](https://www.crowdai.org/challenges/nips-2017-learning-to-run).
 
 ## Getting started
 
-* Anaconda is required to run this app. Anaconda will create a virtual environment with all the necessary libraries, to avoid conflicts with libraries installed in your operating system. Please follow this [link](https://www.continuum.io/downloads) to install Anaconda.
+* Anaconda is required to run this application. Anaconda will create a virtual environment with all the necessary libraries, to avoid conflicts with libraries installed in your operating system. Please follow this [link](https://www.continuum.io/downloads) to install Anaconda.
 
 * Install osim-rl following these [steps](https://github.com/stanfordnmbl/osim-rl#getting-started).
 
