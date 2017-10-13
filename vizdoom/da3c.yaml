@@ -1,18 +1,16 @@
 environment:
   run: python environment/training.py
   name: ppaquette/DoomMyWayHome-v0
-  max_episodes: 10000
-  infinite_run: False
-
-metrics:
-  episode_reward: true
-  server_latency: false
-  action: false
-  mu: false
-  sigma2: false
-  critic: true
+  infinite_run: True
 
 relaax-metrics-server:
+  enable_unknown_metrics: true
+  metrics:
+    episode_reward: true
+    server_latency: false
+    action: false
+    critic: true
+
   bind: localhost:7002
   metrics_dir: logs/metrics
   log_metrics_to_console: false
@@ -40,10 +38,10 @@ algorithm:
     action_size: 4                # action size for the given environment
 
   batch_size: 20                  # local loop size for one episode
-  hidden_sizes: [256]
+  hidden_sizes: [288]
+  critic_scale: 0.25
 
-  use_icm: true                   # ICM module switcher
-  use_gae: true                   # switcher for generalized advantage estimation
+  use_icm: false                  # ICM module switcher
   gae_lambda: 1.00                # lambda for generalized advantage estimation
 
   use_lstm: true                  # to use LSTM instead of FF, set to the True
@@ -55,8 +53,3 @@ algorithm:
   entropy_beta: 0.01              # entropy regularization constant
   rewards_gamma: 0.99             # rewards discount factor
   gradients_norm_clipping: 40.
-
-  icm:                            # ICM relevant parameters
-    nu: 0.01                      # prediction bonus, last=0.8
-    beta: 0.2                     # forward loss importance against inverse
-    lr: 1e-3                      # ICM learning rate
