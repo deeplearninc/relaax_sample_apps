@@ -17,5 +17,7 @@ DQN runs in four favours. They are different in command lines only. Use `relaax 
 ## <a name="policy-gradient"></a>Policy gradient
 To run it navigate to this directory and start `relaax run -c policy-gradient.yaml`. It takes couple of minutes to converge. Use `tensorboard --logdir logs/metrics` to follow progress. The episode reward will be 200 is most episodes.
 
+![img](../resources/cartpole_policy_gradient.png)
+
 ## <a name="trpo"></a>TRPO
 TRPO runs in three favours. They are different in command lines only. Use `relaax run -c trpo.ppo.yaml` for PPO, `relaax run -c trpo.trpo-d1.yaml` for TRPO-D1, `relaax run -c trpo.trpo-d2.yaml` for TRPO-D2. It takes five minutes to converge. Use `tensorboard --logdir logs/metrics` to follow progress. The episode reward will be 200 is most episodes.
