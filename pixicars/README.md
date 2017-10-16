@@ -5,7 +5,7 @@ PixiCars is JavaScript environment hosted in browser. 2D cars runs in scene fill
 ## <a name="da3c"></a>DA3C
 To run it navigate to this directory and start `relaax run -c da3c.yaml`. Use `tensorboard --logdir logs/metrics` to follow progress. TODO: converges?
 
-## <a name="dppg"></a>DPPG
+## <a name="ddpg"></a>DDPG
 To run it navigate to this directory and start `relaax run -c ddpg.yaml`. Use `tensorboard --logdir logs/metrics` to follow progress. TODO: converges?
 
 ## <a name="trpo"></a>TRPO
