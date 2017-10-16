@@ -7,7 +7,7 @@ The observation is a vector of four numbers (the cart position and speed and the
 ## <a name="da3c"></a>DA3C
 To run it navigate to this directory and start `relaax run -c da3c.yaml`.  It takes several minutes to converge. Wait for 300 episodes.  Use `tensorboard --logdir logs/metrics` to follow progress. The episode reward will be 200 is most episodes.
 
-![img](resources/cartpole_da3c.png)
+![img](../resources/cartpole_da3c.png)
 
 ## <a name="dqn"></a>DQN
 DQN runs in four favours. They are different in command lines only. Use `relaax run -c dqn.yaml` for plain DQN, `relaax run -c dqn.double.yaml` for double DQN, `relaax run -c dqn.dueling.yaml` for dueling DQN and `relaax run -c dqn.yaml` for double dueling DQN. It takes half of hour to converge. Use `tensorboard --logdir logs/metrics` to follow progress. The episode reward will be 200 is most episodes.
