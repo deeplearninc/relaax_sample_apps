@@ -6,11 +6,13 @@ environment:
   infinite_run: false
 
 relaax-metrics-server:
-  enable_unknown_metrics: True
+  enable_unknown_metrics: true
   metrics:
     episode_reward: true
-    server_latency: false
-    action: false
+    server_latency: true
+    action: true
+    mu: true
+    sigma2: true
     critic: true
 
   bind: localhost:7002
