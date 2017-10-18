@@ -11,7 +11,7 @@ Sample applications to demonstrate and test [RELAAX](../../../relaax) abilities.
 - [NIPS2017: Learning to run](nips-learning-to-run/README.md)
 - [Pendulum](pendulum/README.md)
     - [DA3C](pendulum/README.md#da3c)
-    - [DPPG](pendulum/README.md#dppg)
+    - [DDPG](pendulum/README.md#ddpg)
 - [PixiCars](pixicars/README.md)
     - [DA3C](pixicars/README.md#da3c)
     - [DDPG](pixicars/README.md#ddpg)
