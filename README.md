@@ -1,5 +1,5 @@
 # relaax_sample_apps
-Sample applications to demonstrate and test [RELAAX](../../../relaax/blob/master/README.md) abilities.
+Sample applications to demonstrate and test [RELAAX](../../../relaax/blob/master) abilities.
 
 ## <a name="contents"></a>Contents
 - [Boxing](boxing/README.md)
