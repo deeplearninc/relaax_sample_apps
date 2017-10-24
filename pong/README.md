@@ -4,3 +4,5 @@
 
 ## <a name="da3c"></a>DA3C
 We run DA3C with LSTM to resolve Pong. To run it navigate to this directory and start `relaax run -c da3c.yaml -n 8`. It takes several hours to converge. Wait for 2M steps.  Use `tensorboard --logdir logs/metrics` to follow progress. Episode reward will be about 20.
+
+![img](../resources/pong_da3c.png)
