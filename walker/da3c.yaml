@@ -20,13 +20,13 @@ relaax-metrics-server:
   log_level: INFO
 
 relaax-parameter-server:
-  --bind: localhost:7000
-  --checkpoint-dir: logs/checkpoints
-  --log-level: INFO
+  bind: localhost:7000
+  checkpoint-dir: logs/checkpoints
+  log-level: INFO
 
 relaax-rlx-server:
-  --bind: localhost:7001
-  --log-level: INFO
+  bind: localhost:7001
+  log-level: INFO
 
 algorithm:
   name: da3c
@@ -53,11 +53,15 @@ algorithm:
   initial_learning_rate: 8e-4
 
   entropy_beta: 1e-4              # entropy regularization constant
+  entropy_type: Origin
   rewards_gamma: 0.99             # rewards discount factor
-  gradients_norm_clipping: 40.
+  gradients_norm_clipping: false  # false (40.) -> norm
   use_filter: True
 
   optimizer: RMSProp
   RMSProp:                        # RMSProp optimizer specific parameters
     decay: 0.99
     epsilon: 0.1
+
+  policy_clip: 1.0
+  critic_clip: 1.0
