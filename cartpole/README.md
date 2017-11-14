@@ -5,7 +5,7 @@
 The observation is a vector of four numbers (the cart position and speed and the pole angle and angular speed). The action is discrete from [0, 1] for force application direction.
 
 ## <a name="da3c"></a>DA3C
-To run it navigate to this directory and start `relaax run -c da3c.yaml`.  It takes several minutes to converge. Wait for 300 episodes.  Use `tensorboard --logdir logs/metrics` to follow progress. The episode reward will be 200 is most episodes.
+To run it navigate to this directory and start `relaax run -c da3c.yaml`.  It takes several minutes to converge. Wait for 300 episodes.  Use `tensorboard --logdir logs/metrics` to follow progress. The episode reward will be 200 in most episodes.
 
 ![img](../resources/cartpole_da3c.png)
 
