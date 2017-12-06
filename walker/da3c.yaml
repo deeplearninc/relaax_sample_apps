@@ -34,13 +34,13 @@ algorithm:
   input:
     shape: [24]                   # shape of input state
     history: 1                    # number of consecutive states to stack
-    use_convolutions: false       # set to true to process input by convolution layers
+    use_convolutions: false       # set to true to process input by set of convolution layers
 
   output:
     continuous: true              # set to true to switch to continuous action space
     action_size: 4                # action size for the given environment
 
-  batch_size: 100                 # local loop size for one episode
+  batch_size: 100                 # experience size to perform one update
   hidden_sizes: [200, 128]
   critic_scale: 10.0
 

@@ -35,7 +35,7 @@ algorithm:
   input:
     shape: [24]                   # shape of input state
     history: 1                    # number of consecutive states to stack
-    use_convolutions: false       # set to true to process input by convolution layers
+    use_convolutions: false       # set to true to process input by set of convolution layers
 
   output:
     continuous: true              # set to true to switch to continuous action space
