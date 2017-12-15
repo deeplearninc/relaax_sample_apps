@@ -12,6 +12,6 @@ This application trains physiologically-based human model to navigate a complex 
 
 * We assume you have RELAAX installed.
 
-* Start training with `relaax run -c da3c.yaml --show-ui -n 3`.
+* Start training with `relaax run -c dppo.yaml -n 4`.
 
 TODO: Does it converge? How long does it take to converge? What is target reward?

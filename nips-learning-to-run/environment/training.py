@@ -3,6 +3,7 @@ from builtins import range
 
 import logging
 from osim.env import RunEnv
+from env_wrapper import OsimWrapper
 
 from relaax.environment.config import options
 from relaax.environment.training import TrainingBase
@@ -15,6 +16,8 @@ class Training(TrainingBase):
     def __init__(self):
         super(Training, self).__init__()
         self.env = RunEnv(visualize=options.get('show_ui', False))
+        if options.get('environment/use_wrapper', True):
+            self.env = OsimWrapper(self.env)
         self.steps = options.get('environment/steps', 200)
 
     def episode(self, number):

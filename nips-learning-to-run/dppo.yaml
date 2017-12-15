@@ -1,0 +1,70 @@
+environment:
+  run: python environment/training.py
+  infinite_run: True
+
+relaax-metrics-server:
+  enable_unknown_metrics: true
+  metrics:
+    episode_reward: true
+    server_latency: false
+    action: true
+    critic: true
+
+  bind: localhost:7002
+  metrics_dir: logs/metrics
+  log_metrics_to_console: false
+  log_level: INFO   # INFO DEBUG
+
+relaax-parameter-server:
+  bind: localhost:7000
+  checkpoint-dir: logs/checkpoints
+  checkpoint_step_interval: 500000
+  checkpoint_time_interval: 10
+  checkpoints_to_keep: 4
+  best_checkpoints_to_keep: 6
+  log-level: INFO   # INFO DEBUG
+
+relaax-rlx-server:
+  bind: localhost:7001
+  log-level: INFO   # INFO DEBUG
+
+version: 1.1.0
+algorithm:
+  name: dppo
+
+  input:
+    shape: [40]
+    history: 1
+    use_convolutions: false
+
+  output:
+    continuous: true              # set to true to switch to continuous action space
+    action_size: 18               # action size for the given environment
+
+  batch_size: 200                 # 100 local loop size for one episode
+  mini_batch: 50                  # 20
+  hidden_sizes: [200, 100]        # [200, 100]
+  activation: relu
+
+  use_lstm: true                  # to use LSTM instead of FF, set to the True
+  # use_filter: true
+  normalize_advantage: true
+  vf_clipped_loss: true
+
+  gamma: 0.90                     # rewards discount factor
+  lambda: 0.90                    # GAE lambda
+  # critic_scale: 1.0
+  # l2_coeff: 1e3
+  # gradients_norm_clipping: 0.5
+
+  clip_e: 0.2
+  # entropy: 0.01
+  learning_rate: 3e-4             # 0.001
+  max_global_step: 1e6            # 1e6
+
+  combine_gradient: dc            # dc | fifo | average
+  num_gradients: 4                # 4 | 1
+  dc_lambda: 0.05
+
+  policy_iterations: 5            # 3
+  value_func_iterations: 5        # 3
