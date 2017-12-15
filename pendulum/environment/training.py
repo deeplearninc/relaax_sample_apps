@@ -14,7 +14,7 @@ class Training(TrainingBase):
 
     def __init__(self):
         super(Training, self).__init__()
-        self.gym = GymEnv(env=options.get('environment/name', 'CartPole-v0'))
+        self.gym = GymEnv(env=options.get('environment/name', 'Pendulum-v0'))
 
     def episode(self, number):
         state = self.gym.reset()
