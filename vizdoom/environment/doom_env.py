@@ -20,6 +20,7 @@ from gym.wrappers.frame_skipping import SkipWrapper
 from ppaquette_gym_doom import wrappers
 
 from relaax.environment.config import options
+from relaax.common.rlx_message import RLXMessageImage
 
 gym.configuration.undo_logger_setup()
 log = logging.getLogger(__name__)
@@ -51,13 +52,17 @@ class DoomEnv(object):
         self._reset_action = env.action_space.sample() \
             if options.get('environment/stochastic_reset', False) else 0
 
-        env.seed(random.randrange(1000000))
+        env.seed(options.get('seed', random.randrange(1000000)))
         self._show_ui = options.get('show_ui', False)
 
-        limit = options.get('environment/limit',
+        limit = options.get('environment/max_episode_steps',
                             env.spec.tags.get('wrapper_config.TimeLimit.max_episode_steps'))
         if limit is not None:
             env._max_episode_steps = limit
+
+        time_limit = options.get('environment/max_episode_seconds', None)
+        if time_limit is not None:
+            env._max_episode_seconds = time_limit
 
         shape = options.get('environment/shape', (42, 42))
         self._shape = (shape[0], shape[1])
@@ -76,7 +81,6 @@ class DoomEnv(object):
         self.observation_space = Box(0.0, 255.0, shape)
         self.observation_space.high[...] = 1.0
 
-        self._scale = (1.0 / 255.0)
         self.reset()
 
     def _get_action_size(self, env):
@@ -116,14 +120,14 @@ class DoomEnv(object):
         self._obs_buffer.append(screen)
         screen = np.max(np.stack(self._obs_buffer), axis=0)
 
-        if self._channels == 1:
+        if self._channels < 2:
             screen = np.dot(screen[..., :3], [0.299, 0.587, 0.114])
 
         screen = np.array(Image.fromarray(screen).resize(
             self._shape, resample=Image.BILINEAR), dtype=np.uint8)
 
         # return processed screen
-        return screen.astype(np.float32) * self._scale
+        return RLXMessageImage(screen)
 
 
 class NoNegativeRewardEnv(gym.RewardWrapper):
