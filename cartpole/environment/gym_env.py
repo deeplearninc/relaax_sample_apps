@@ -57,13 +57,16 @@ class GymEnv(object):
         self._reset_action = self.gym.action_space.sample() \
             if options.get('environment/stochastic_reset', False) else 0
 
-        self.gym.seed(random.randrange(1000000))
+        self.gym.seed(options.get('seed', random.randrange(1000000)))
         self._show_ui = options.get('show_ui', False)
 
-        limit = options.get('environment/limit',
-                            self.gym.spec.tags.get('wrapper_config.TimeLimit.max_episode_steps'))
-        if limit is not None:
-            self.gym._max_episode_steps = limit
+        self.gym._max_episode_steps = \
+            options.get('environment/max_episode_steps',
+                        self.gym.spec.tags.get('wrapper_config.TimeLimit.max_episode_steps'))
+
+        time_limit = options.get('environment/max_episode_seconds', None)
+        if time_limit is not None:
+            self.gym._max_episode_seconds = time_limit
 
         shape = options.get('environment/shape', options.get('environment/image', (84, 84)))
         self._shape = shape[:2]
@@ -84,7 +87,6 @@ class GymEnv(object):
                       (options.algorithm.output.action_size, self.action_size))
             sys.exit(-1)
 
-        self._scale = (1.0 / 255.0)
         self.reset()
 
     def _get_action_size(self):
@@ -93,8 +95,6 @@ class GymEnv(object):
             return space.shape[0]
         return space.n
 
-    def get_action_high(self):
-        return self.gym.action_space.high
 
     def act(self, action):
         if self._show_ui or self._record:

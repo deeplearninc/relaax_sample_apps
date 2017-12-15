@@ -1,0 +1,60 @@
+environment:
+  run: python environment/training.py
+  name: CartPole-v0
+  max_episodes: 200
+  infinite_run: false
+
+relaax-metrics-server:
+  enable_unknown_metrics: false
+  metrics:
+    episode_reward: true
+    server_latency: true
+    action: true
+    mu: true
+    sigma2: true
+    critic: true
+
+  bind: localhost:7002
+  metrics_dir: logs/metrics
+  log_metrics_to_console: false
+  log_level: INFO     # DEBUG | INFO
+
+relaax-parameter-server:
+  bind: localhost:7000
+  checkpoint-dir: logs/checkpoints
+  log-level: INFO   # DEBUG | INFO
+
+relaax-rlx-server:
+  bind: localhost:7001
+  log-level: INFO   # DEBUG | INFO
+
+version: 1.1.0
+algorithm:
+  name: dppo
+
+  input:
+    shape: [4]
+    history: 1
+    use_convolutions: false
+
+  output:
+    continuous: false
+    action_size: 2
+
+  hidden_sizes: [10]
+  activation: relu
+
+  batch_size: 200
+  gamma: 0.99                     # rewards discount factor
+  lambda: 0.95                    # GAE lambda
+
+  clip_e: 0.2
+  # entropy: 0.01
+  learning_rate: 0.001
+  gradients_norm_clipping: 40.0
+
+  combine_gradient: dc
+  dc_lambda: 0.05
+
+  policy_iterations: 10
+  value_func_iterations: 10

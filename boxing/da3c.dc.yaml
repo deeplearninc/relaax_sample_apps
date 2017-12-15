@@ -1,7 +1,9 @@
 environment:
   run: python environment/training.py
   name: BoxingDeterministic-v4
-  shape: [84, 84]
+  shape: [42, 42]
+  no_op_max: 30
+  stochastic_reset: True
   infinite_run: True
 
 relaax-metrics-server:
@@ -9,18 +11,21 @@ relaax-metrics-server:
   metrics:
     episode_reward: true
     server_latency: false
-    action: false
+    action: true
     critic: true
     state: false
 
   bind: localhost:7002
   metrics_dir: logs/metrics
   log_metrics_to_console: false
-  log_level: INFO
+  log_level: INFO  # DEBUG | INFO
 
 relaax-parameter-server:
   bind: localhost:7000
   checkpoint-dir: logs/checkpoints
+  checkpoint_step_interval: 2000000
+  checkpoints_to_keep: 2
+  best_checkpoints_to_keep: 4
   log-level: INFO
 
 relaax-rlx-server:
@@ -32,10 +37,9 @@ algorithm:
   name: da3c
 
   input:
-    shape: [84, 84]
+    shape: [42, 42]
     history: 4
     use_convolutions: true
-    universe: false
 
   output:
     continuous: false
@@ -45,16 +49,15 @@ algorithm:
   hidden_sizes: [256]
 
   use_lstm: false                 # to use LSTM instead of FF, set to the True
-  max_global_step: 1e8            # amount of maximum global steps to pass through the training
+  max_global_step: 5e7            # amount of maximum global steps to pass through the training
 
-  optimizer: RMSProp
-  initial_learning_rate: 7e-4
-  critic_scale: 2.0
+  optimizer: Adam
+  initial_learning_rate: 1e-4
 
   entropy_beta: 0.01              # entropy regularization constant
   rewards_gamma: 0.99             # rewards discount factor
+  gae_lambda: 0.97                # lambda for generalized advantage estimation
   gradients_norm_clipping: 40.
 
-  RMSProp:                        # RMSProp optimizer specific parameters
-    decay: 0.99
-    epsilon: 0.1
+  combine_gradient: dc            # dc | fifo | average
+  dc_lambda: 0.05
