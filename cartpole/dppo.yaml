@@ -53,8 +53,7 @@ algorithm:
   learning_rate: 0.001
   gradients_norm_clipping: 40.0
 
-  combine_gradient: dc
-  dc_lambda: 0.05
+  combine_gradients: dc
 
   policy_iterations: 10
   value_func_iterations: 10

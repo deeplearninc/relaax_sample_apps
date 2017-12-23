@@ -60,13 +60,10 @@ algorithm:
   # gradients_norm_clipping: 0.5
 
   clip_e: 0.2
-  # entropy: 0.01
   learning_rate: 3e-4             # 0.001
   max_global_step: 1e6            # 1e6
 
-  combine_gradient: fifo          # dc | fifo | average
-  num_gradients: 4                # 4 | 1
-  dc_lambda: 0.05
+  combine_gradients: fifo         # dc | fifo | average
 
   policy_iterations: 10           # 3
   value_func_iterations: 10       # 3
