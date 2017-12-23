@@ -40,6 +40,7 @@ algorithm:
 
   output:
     action_size: 2                      # action size for the given environment
+    q_values: false                     # use full set of q_values instead of max one if true
 
   double_dqn: false                     # use DoubleDQN if true
   dueling_dqn: true                     # use DuelingDQN if true
