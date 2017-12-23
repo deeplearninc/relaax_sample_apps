@@ -9,11 +9,9 @@ relaax-metrics-server:
   enable_unknown_metrics: false
   metrics:
     episode_reward: true
-    server_latency: true
+    server_latency: false
     action: true
-    mu: true
-    sigma2: true
-    critic: true
+    state: false
 
   bind: localhost:7002
   metrics_dir: logs/metrics
