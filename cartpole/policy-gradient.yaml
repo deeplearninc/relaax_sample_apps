@@ -20,6 +20,9 @@ relaax-metrics-server:
 relaax-parameter-server:
   bind: localhost:7000
   checkpoint-dir: logs/checkpoints
+  checkpoint_time_interval: 5
+  checkpoints_to_keep: 1
+  best_checkpoints_to_keep: 1
   log-level: INFO
 
 relaax-rlx-server:
@@ -29,7 +32,7 @@ relaax-rlx-server:
 version: 1.1.0
 algorithm:
   name: policy_gradient         # name of the algorithm to load
-  combine_gradient: fifo        # fifo (by default) | average | dc
+  combine_gradients: dc         # fifo (by default) | avg | dc
 
   input:
     shape: [4]                  # shape of the incoming state from an environment
