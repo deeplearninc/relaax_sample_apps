@@ -10,7 +10,10 @@ To run it navigate to this directory and start `relaax run -c da3c.yaml`.  It ta
 ![img](../resources/cartpole_da3c.png)
 
 ## <a name="dqn"></a>DQN
-DQN runs in four favours. They are different in command lines only. Use `relaax run -c dqn.yaml` for plain DQN, `relaax run -c dqn.double.yaml` for double DQN, `relaax run -c dqn.dueling.yaml` for dueling DQN and `relaax run -c dqn.yaml` for double dueling DQN. It takes half of hour to converge. Use `tensorboard --logdir logs/metrics` to follow progress. The episode reward will be 200 is most episodes.
+DQN runs in four favours. They are different by command lines and its config yamls. Use `relaax run -c dqn.yaml -n 4`
+for plain DQN (results are on the graph below), `relaax run -c dqn.double.yaml` for double DQN, `relaax run -c dqn.dueling.yaml`
+for dueling DQN and `relaax run -c dqn.double_dueling.yaml` for double dueling DQN. It takes several minutes to converge.
+Use `tensorboard --logdir logs/metrics` to follow progress. The episode reward will be 200 is most episodes.
 
 ![img](../resources/cartpole_dqn.png)
 

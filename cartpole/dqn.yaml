@@ -30,6 +30,7 @@ relaax-rlx-server:
 version: 1.1.0
 algorithm:
   name: dqn                             # short name for algorithm to load
+  combine_gradients: dc
 
   input:
     shape: [4]                          # shape of input state
