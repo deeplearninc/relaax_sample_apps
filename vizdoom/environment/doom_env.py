@@ -36,7 +36,7 @@ class DoomEnv(object):
         acwrapper = wrappers.ToDiscrete('minimal')
         env = modewrapper(obwrapper(acwrapper(env)))
 
-        frame_skip = options.get('environment/frame_skip', None)
+        frame_skip = options.get('environment/frame_skip', 4)
         if frame_skip is not None:
             skip_wrapper = SkipWrapper(frame_skip)
             env = skip_wrapper(env)
@@ -52,21 +52,18 @@ class DoomEnv(object):
         self._reset_action = env.action_space.sample() \
             if options.get('environment/stochastic_reset', False) else 0
 
-        env.seed(options.get('seed', random.randrange(1000000)))
+        env.seed(random.randrange(1000000))
         self._show_ui = options.get('show_ui', False)
 
-        limit = options.get('environment/max_episode_steps',
+        limit = options.get('environment/limit',
                             env.spec.tags.get('wrapper_config.TimeLimit.max_episode_steps'))
         if limit is not None:
             env._max_episode_steps = limit
 
-        time_limit = options.get('environment/max_episode_seconds', None)
-        if time_limit is not None:
-            env._max_episode_seconds = time_limit
-
         shape = options.get('environment/shape', (42, 42))
-        self._shape = (shape[0], shape[1])
-        self._channels = 1 if len(shape) == 2 else 3
+        self._shape = shape[:2]
+        assert len(self._shape) > 1, 'You should provide 2D or 3D shape'
+        self._channels = 0 if len(self._shape) == 2 else self._shape[-1]
 
         self.action_size = self._get_action_size(env)
         if self.action_size != options.algorithm.output.action_size:
@@ -75,8 +72,14 @@ class DoomEnv(object):
                    options.algorithm.output.action_size, self.action_size))
             sys.exit(-1)
 
-        self.env = NoNegativeRewardEnv(env)
-        self._obs_buffer = deque(maxlen=2)
+        if options.get('environment/no_life', True):
+            env = NoNegativeRewardEnv(env)
+        self.env = env
+
+        self._process_img = self._process_common
+        if options.get('environment/max_pool', True):
+            self._obs_buffer = deque(maxlen=2)
+            self._process_img = self._process_max
 
         self.observation_space = Box(0.0, 255.0, shape)
         self.observation_space.high[...] = 1.0
@@ -116,18 +119,24 @@ class DoomEnv(object):
 
         return state
 
-    def _process_img(self, screen):
+    def _process_common(self, screen):
+        if self._channels < 2:
+            screen = np.dot(screen[..., :3], [0.299, 0.587, 0.114]).astype(np.uint8)
+
+        screen = RLXMessageImage(Image.fromarray(screen).resize(self._shape, resample=Image.BILINEAR))
+
+        return screen
+
+    def _process_max(self, screen):
         self._obs_buffer.append(screen)
         screen = np.max(np.stack(self._obs_buffer), axis=0)
 
         if self._channels < 2:
-            screen = np.dot(screen[..., :3], [0.299, 0.587, 0.114])
+            screen = np.dot(screen[..., :3], [0.299, 0.587, 0.114]).astype(np.uint8)
 
-        screen = np.array(Image.fromarray(screen).resize(
-            self._shape, resample=Image.BILINEAR), dtype=np.uint8)
+        screen = RLXMessageImage(Image.fromarray(screen).resize(self._shape, resample=Image.BILINEAR))
 
-        # return processed screen
-        return RLXMessageImage(screen)
+        return screen
 
 
 class NoNegativeRewardEnv(gym.RewardWrapper):
