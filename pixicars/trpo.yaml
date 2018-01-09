@@ -1,22 +1,37 @@
 environment:
   run: environment/start
 
+relaax-metrics-server:
+  enable_unknown_metrics: true
+  metrics:
+    episode_reward: true
+    server_latency: true
+    action: true
+    critic: true
+
+  bind: localhost:7002
+  metrics_dir: logs/metrics
+  log_metrics_to_console: false
+  log_level: INFO
+
 relaax-parameter-server:
-  --bind: localhost:7000
-  --metrics-dir: logs/metrics/
-  --checkpoint-dir: logs/checkpoints/
-  --log-level: DEBUG
+  bind: localhost:7000
+  metrics-dir: logs/metrics/
+  checkpoint-dir: logs/checkpoints/
+  log-level: DEBUG
 
 relaax-rlx-server:
-  --bind: localhost:7001
-  --log-level: DEBUG
+  bind: localhost:7001
+  log-level: DEBUG
 
 relaax-wsproxy:
-  --bind: localhost:9000
-  --log-level: DEBUG
+  bind: localhost:9000
+  log-level: DEBUG
 
+version: 1.1.0
 algorithm:
   name: trpo
+  subtype: trpo-d2
 
   input:
     shape: [58]
@@ -58,3 +73,8 @@ algorithm:
   TRPO:
     cg_damping: 0.1               # multiple of the identity to Fisher matrix during CG
     max_kl: 0.01                  # KL divergence between old and new policy
+
+  PPO:
+    clip_e: 0.2                   # clipping parameter for PPO loss function
+    learning_rate: 0.001          # learning rate for Adam optimizer used with PPO loss
+    n_epochs: 10                  # number of epochs to run on each batch

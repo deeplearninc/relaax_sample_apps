@@ -4,6 +4,18 @@ environment:
   max_episodes: 10000
   infinite_run: false
 
+relaax-metrics-server:
+  enable_unknown_metrics: false
+  metrics:
+    episode_reward: true
+    server_latency: true
+    action: true
+
+  bind: localhost:7002
+  metrics_dir: logs/metrics
+  log_metrics_to_console: false
+  log_level: INFO
+
 relaax-parameter-server:
   bind: localhost:7000
   metrics-dir: logs/metrics

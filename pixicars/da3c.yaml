@@ -2,20 +2,19 @@ environment:
   run: environment/start
 
 relaax-metrics-server:
-  bind: localhost:7002
-  metrics_dir: logs/da3c/metrics
-  log_metrics: false
-  log_level: INFO
+  enable_unknown_metrics: true
+  metrics:
+    episode_reward: true
+    server_latency: true
+    action: true
+    mu: false
+    sigma2: false
+    critic: true
 
-enable_unknown_metrics: true
-metrics:
-  steps_per_sec: false
-  episode_reward: true
-  server_latency: false
-  action: false
-  mu: false
-  sigma2: false
-  critic: false
+  bind: localhost:7002
+  metrics_dir: logs/metrics
+  log_metrics_to_console: false
+  log_level: INFO
 
 relaax-metrics-server:
   bind: localhost:7002
