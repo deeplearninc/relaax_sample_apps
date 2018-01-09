@@ -41,6 +41,7 @@ algorithm:
   batch_size: 20                  # local loop size for one episode
   hidden_sizes: [288]
   critic_scale: 0.25
+  activation: elu
 
   use_icm: false                  # ICM module switcher
   gae_lambda: 1.00                # lambda for generalized advantage estimation
