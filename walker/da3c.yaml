@@ -60,7 +60,6 @@ algorithm:
   optimizer: RMSProp
   gradients_norm_clipping: 40.0   # value to clip the gradients by its global norm, set to false to not
 
-  optimizer: RMSProp
   RMSProp:                        # RMSProp optimizer specific parameters
     decay: 0.99
     epsilon: 0.1
