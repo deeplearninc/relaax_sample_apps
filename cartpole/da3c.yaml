@@ -33,7 +33,7 @@ algorithm:
   input:
     shape: [4]                    # shape of input state
     history: 1                    # number of consecutive states to stuck to represent an input
-    use_convolutions: true        # set to True to use convolutions to process the input,
+    use_convolutions: false       # set to True to use convolutions to process the input,
                                   # it uses the set of convolutions from universe architecture by default
   output:
     continuous: false             # set to True to handle with continuous action type
