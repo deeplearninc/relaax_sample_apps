@@ -55,7 +55,7 @@ algorithm:
   gae_lambda: 0.97                # lambda for generalized advantage estimation
 
   initial_learning_rate: 1e-4     # initial learning rate to start the training
-  use_linear_schedule: False      # set to True to use linear learning rate annealing wrt max_global_step
+  use_linear_schedule: false      # set to True to use linear learning rate annealing wrt max_global_step
 
   optimizer: Adam                 # type of optimizer to use: Adam | RMSProp
   gradients_norm_clipping: 40.    # value to clip the gradients by its global norm

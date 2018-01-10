@@ -34,34 +34,34 @@ algorithm:
 
   input:
     shape: [3]                    # shape of input state
-    history: 1                    # number of consecutive states to stack
-    use_convolutions: false       # set to true to process input by convolution layers
-
+    history: 1                    # number of consecutive states to stuck to represent an input
+    use_convolutions: true        # set to True to use convolutions to process the input,
+                                  # it uses the set of convolutions from universe architecture by default
   output:
-    continuous: true              # set to true to switch to continuous action space
+    continuous: true              # set to True to handle with continuous action type
     # loss_type: Expanded           # Normal | Expanded | Extended
     action_size: 1                # action size for the given environment
-    scale: 2.0                    # multiplier to scale continuous output
+    scale: 2.0                    # action multiplier to scale continuous output from [-1..1] range
 
   batch_size: 10                  # maximum batch size, which need to accumulate for one update
-  hidden_sizes: [24, 24]
-  critic_scale: 10.0
-
-  use_icm: false                  # ICM module switcher
-  gae_lambda: 1.00                # lambda for generalized advantage estimation
+  hidden_sizes: [24, 24]          # list of num_units for hidden fc layers
 
   use_lstm: false                 # to use LSTM instead of FF, set to the True
   max_global_step: 4e5            # amount of maximum global steps to pass through the training
 
-  initial_learning_rate: 1e-3
+  rewards_gamma: 0.99             # rewards discount factor
+  use_filter: True                # set to True to use mean/std running filter
+
+  initial_learning_rate: 1e-3     # initial learning rate to start the training
+  use_linear_schedule: false      # set to True to use linear learning rate annealing wrt max_global_step
+  critic_scale: 10.0              # coefficient to scale the critic loss or learning rate
 
   entropy_beta: 1e-3              # entropy regularization constant
-  entropy_type: Gauss
-  rewards_gamma: 0.99             # rewards discount factor
-  gradients_norm_clipping: false  # 10.
-  use_filter: True
+  entropy_type: Gauss             # switch between relevant entropy types: Origin | Gauss
 
   optimizer: RMSProp
+  gradients_norm_clipping: false  # value to clip the gradients by its global norm, set to false to not
+
   RMSProp:                        # RMSProp optimizer specific parameters
     decay: 0.99
     epsilon: 0.1
