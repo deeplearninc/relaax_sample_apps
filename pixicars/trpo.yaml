@@ -12,21 +12,21 @@ relaax-metrics-server:
   bind: localhost:7002
   metrics_dir: logs/metrics
   log_metrics_to_console: false
-  log_level: INFO
+  log_level: INFO  # DEBUG | INFO
 
 relaax-parameter-server:
   bind: localhost:7000
   metrics-dir: logs/metrics/
   checkpoint-dir: logs/checkpoints/
-  log-level: DEBUG
+  log-level: INFO  # DEBUG | INFO
 
 relaax-rlx-server:
   bind: localhost:7001
-  log-level: DEBUG
+  log-level: INFO  # DEBUG | INFO
 
 relaax-wsproxy:
   bind: localhost:9000
-  log-level: DEBUG
+  log-level: INFO  # DEBUG | INFO
 
 version: 1.1.0
 algorithm:
