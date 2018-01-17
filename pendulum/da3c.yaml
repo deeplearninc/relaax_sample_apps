@@ -54,7 +54,7 @@ algorithm:
   use_filter: True                # set to True to use mean/std running filter
 
   initial_learning_rate: 1e-3     # initial learning rate to start the training
-  use_linear_schedule: false      # set to True to use linear learning rate annealing wrt max_global_step
+  use_linear_schedule: true       # set to True to use linear learning rate annealing wrt max_global_step
   critic_scale: 10.0              # coefficient to scale the critic loss or learning rate
 
   entropy_beta: 1e-3              # entropy regularization constant
