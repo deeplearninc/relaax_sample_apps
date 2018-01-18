@@ -12,6 +12,7 @@ relaax-metrics-server:
     server_latency: false
     action: true
     critic: true
+    state: false
 
   bind: localhost:7002
   metrics_dir: logs/metrics

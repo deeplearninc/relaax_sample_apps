@@ -10,9 +10,8 @@ relaax-metrics-server:
     episode_reward: true
     server_latency: true
     action: true
-    mu: true
-    sigma2: true
     critic: true
+    state: false
 
   bind: localhost:7002
   metrics_dir: logs/metrics
