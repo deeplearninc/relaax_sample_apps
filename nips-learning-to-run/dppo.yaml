@@ -60,7 +60,7 @@ algorithm:
 
   clip_e: 0.2
   # entropy: 0.01
-  learning_rate: 3e-4             # 0.001
+  initial_learning_rate: 3e-4     # 0.001
   max_global_step: 1e6            # 1e6
 
   combine_gradients: dc           # dc | fifo | average

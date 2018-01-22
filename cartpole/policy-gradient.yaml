@@ -44,5 +44,5 @@ algorithm:
 
   hidden_sizes: [10]            # list to define layers sizes after convolutions
   batch_size: 200               # t_max for batch collection step size
-  learning_rate: 0.01           # learning rate for the optimizer
+  initial_learning_rate: 0.01   # learning rate for the optimizer
   GAMMA: 0.99                   # rewards discount factor
