@@ -52,8 +52,10 @@ algorithm:
 
   rewards_gamma: 0.99             # rewards discount factor
   use_filter: True                # set to True to use mean/std running filter
+  normalize_advantage: True       # set to True to normalize advantage
 
   initial_learning_rate: 1e-3     # initial learning rate to start the training
+  learning_rate_end: 2e-4
   use_linear_schedule: true       # set to True to use linear learning rate annealing wrt max_global_step
   critic_scale: 10.0              # coefficient to scale the critic loss or learning rate
 
