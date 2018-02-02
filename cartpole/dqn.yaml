@@ -9,28 +9,28 @@ relaax-metrics-server:
   enable_unknown_metrics: false
   metrics:
     episode_reward: true
-    server_latency: true
+    server_latency: false
     action: true
-    mu: true
-    sigma2: true
-    critic: true
+    state: false
 
   bind: localhost:7002
   metrics_dir: logs/metrics
   log_metrics_to_console: false
-  log_level: INFO
+  log_level: INFO  # DEBUG | INFO
 
 relaax-parameter-server:
-  --bind: localhost:7000
-  --checkpoint-dir: logs/checkpoints
-  --log-level: INFO
+  bind: localhost:7000
+  checkpoint-dir: logs/checkpoints
+  log-level: INFO  # DEBUG | INFO
 
 relaax-rlx-server:
-  --bind: localhost:7001
-  --log-level: INFO
+  bind: localhost:7001
+  log-level: INFO  # DEBUG | INFO
 
+version: 1.1.0
 algorithm:
   name: dqn                             # short name for algorithm to load
+  combine_gradients: dc
 
   input:
     shape: [4]                          # shape of input state
@@ -39,6 +39,7 @@ algorithm:
 
   output:
     action_size: 2                      # action size for the given environment
+    q_values: false                     # use full set of q_values instead of max one if true
 
   double_dqn: false                     # use DoubleDQN if true
   dueling_dqn: false                    # use DuelingDQN if true
@@ -64,4 +65,3 @@ algorithm:
     end: 0.02                           # end value for epsilon
     stochastic: false                   # use stochastic number of eps decay steps if true
     decay_steps: 10000                  # number of decay steps or decay steps range if stochastic == true
-

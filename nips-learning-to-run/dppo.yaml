@@ -1,9 +1,6 @@
 environment:
   run: python environment/training.py
-  name: BipedalWalker-v2
-  shape: [24]
   infinite_run: True
-  limit: 2048
 
 relaax-metrics-server:
   enable_unknown_metrics: true
@@ -21,10 +18,11 @@ relaax-metrics-server:
 
 relaax-parameter-server:
   bind: localhost:7000
-  metrics-dir: logs/metrics
   checkpoint-dir: logs/checkpoints
   checkpoint_step_interval: 500000
+  checkpoint_time_interval: 10
   checkpoints_to_keep: 4
+  best_checkpoints_to_keep: 6
   log-level: INFO  # DEBUG | INFO
 
 relaax-rlx-server:
@@ -36,35 +34,38 @@ algorithm:
   name: dppo
 
   input:
-    shape: [24]
+    shape: [40]
     history: 1
     use_convolutions: false
 
   output:
     continuous: true              # set to true to switch to continuous action space
-    action_size: 4                # action size for the given environment
+    action_size: 18               # action size for the given environment
 
-  batch_size: 2048                # 100 local loop size for one episode
-  mini_batch: 64                  # 20
+  batch_size: 200                 # 100 local loop size for one episode
+  mini_batch: 50                  # 20
   hidden_sizes: [200, 100]        # [200, 100]
   activation: relu
 
   use_lstm: true                  # to use LSTM instead of FF, set to the True
-  use_filter: true
+  # use_filter: true
   normalize_advantage: true
   vf_clipped_loss: true
 
-  gamma: 0.99                     # rewards discount factor
-  lambda: 0.95                    # GAE lambda
+  gamma: 0.90                     # rewards discount factor
+  lambda: 0.90                    # GAE lambda
   # critic_scale: 1.0
   # l2_coeff: 1e3
   # gradients_norm_clipping: 0.5
 
   clip_e: 0.2
+  # entropy: 0.01
   initial_learning_rate: 3e-4     # 0.001
   max_global_step: 1e6            # 1e6
 
-  combine_gradients: fifo         # dc | fifo | average
+  combine_gradients: dc           # dc | fifo | average
+  num_gradients: 4                # 4 | 1
+  dc_lambda: 0.05
 
-  policy_iterations: 10           # 3
-  value_func_iterations: 10       # 3
+  policy_iterations: 5            # 3
+  value_func_iterations: 5        # 3

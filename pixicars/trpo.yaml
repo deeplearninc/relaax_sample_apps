@@ -1,22 +1,37 @@
 environment:
   run: environment/start
 
+relaax-metrics-server:
+  enable_unknown_metrics: true
+  metrics:
+    episode_reward: true
+    server_latency: true
+    action: true
+    critic: true
+
+  bind: localhost:7002
+  metrics_dir: logs/metrics
+  log_metrics_to_console: false
+  log_level: INFO  # DEBUG | INFO
+
 relaax-parameter-server:
-  --bind: localhost:7000
-  --metrics-dir: logs/metrics/
-  --checkpoint-dir: logs/checkpoints/
-  --log-level: DEBUG
+  bind: localhost:7000
+  metrics-dir: logs/metrics/
+  checkpoint-dir: logs/checkpoints/
+  log-level: INFO  # DEBUG | INFO
 
 relaax-rlx-server:
-  --bind: localhost:7001
-  --log-level: DEBUG
+  bind: localhost:7001
+  log-level: INFO  # DEBUG | INFO
 
 relaax-wsproxy:
-  --bind: localhost:9000
-  --log-level: DEBUG
+  bind: localhost:9000
+  log-level: INFO  # DEBUG | INFO
 
+version: 1.1.0
 algorithm:
   name: trpo
+  subtype: trpo-d2
 
   input:
     shape: [58]

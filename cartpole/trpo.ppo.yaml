@@ -18,20 +18,20 @@ relaax-metrics-server:
   bind: localhost:7002
   metrics_dir: logs/metrics
   log_metrics_to_console: false
-  log_level: INFO
+  log_level: INFO  # DEBUG | INFO
 
 relaax-parameter-server:
-  --bind: localhost:7000
-  --checkpoint-dir: logs/checkpoints
-  --log-level: INFO
+  bind: localhost:7000
+  checkpoint-dir: logs/checkpoints
+  log-level: INFO  # DEBUG | INFO
 
 relaax-rlx-server:
-  --bind: localhost:7001
-  --log-level: INFO
+  bind: localhost:7001
+  log-level: INFO  # DEBUG | INFO
 
+version: 1.1.0
 algorithm:
   name: trpo
-
   subtype: ppo
 
   input:
@@ -54,10 +54,6 @@ algorithm:
     timesteps_per_batch: 5000     # number of experience to collect before update
     rewards_gamma: 0.995          # rewards discount factor
     gae_lambda: 0.97              # lambda from generalized advantage estimation
-
-  TRPO:
-    cg_damping: 0.1               # multiple of the identity to Fisher matrix during CG
-    max_kl: 0.01                  # KL divergence between old and new policy
 
   PPO:
     clip_e: 0.2                   # clipping parameter for PPO loss function
