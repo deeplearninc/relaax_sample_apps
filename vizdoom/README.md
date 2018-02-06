@@ -7,7 +7,17 @@ the set of possible actions to each game type you can find there: `ppaquette_gym
 The default level is 'ppaquette/DoomMyWayHome-v0' which has `4` possible actions.
 
 We run DA3C with LSTM to resolve this environment.
-To run it navigate to this directory and start `relaax run -c da3c.yaml -n 8`.
-It takes several hours to converge. Wait for 3-4M steps.
+To run it navigate to this directory and start `relaax run -c da3c.yaml -n 4`.
+It takes several hours to converge. Wait for 8-10M steps.
 Use `tensorboard --logdir logs/metrics` to follow progress.
-Episode reward will be about 1 most of the time.
+Episode reward will be about 1 most of the time:
+
+`DA3C-LSTM-4` on ppaquette Gym's Doom:
+
+![img](../resources/DA3C-LSTM-4_Universe.png "DA3C on Doom")
+
+To get better result it allows to use `ICM` (Intrinsic Curiosity Module).  
+It also takes several hours to converge. Wait for 5-7M steps.  
+`DA3C-LSTM-ICM-4` on ppaquette Gym's Doom:
+
+![img](../resources/DA3C-LSTM-ICM-4_Universe.png "DA3C with ICM on Doom")
