@@ -15,8 +15,7 @@ environment:
   # 56 Zaxxon
   # missed: Surround
   name: PongDeterministic-v4
-  shape: [42,42]  # image: [42, 42]
-  # frame_skip: 4
+  shape: [42,42]
   no_op_max: 30
   stochastic_reset: True
   max_episode_seconds: 1800
