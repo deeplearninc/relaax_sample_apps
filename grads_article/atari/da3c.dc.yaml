@@ -68,9 +68,9 @@ algorithm:
   max_global_step: 8e7            # amount of maximum global steps to pass through the training
 
   rewards_gamma: 0.99             # rewards discount factor
-  entropy_beta: 1e-3              # entropy regularization constant
+  entropy_beta: 1e-2              # entropy regularization constant
 
-  initial_learning_rate: 3e-4     # initial learning rate to start the training
+  initial_learning_rate: 1e-4     # initial learning rate to start the training
   use_linear_schedule: false      # set to True to use linear learning rate annealing wrt max_global_step
 
   optimizer: Adam                 # type of optimizer to use: Adam | RMSProp
