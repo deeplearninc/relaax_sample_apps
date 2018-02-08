@@ -76,4 +76,5 @@ algorithm:
   gradients_norm_clipping: 40.    # value to clip the gradients by its global norm
 
   combine_gradients: dc           # gradient's combining method: dc | fifo | average
-  dc_lambda: 0.05                 # delay compensation regularization constant
+  dc_adaptive: true
+  dc_lambda: 2.0
