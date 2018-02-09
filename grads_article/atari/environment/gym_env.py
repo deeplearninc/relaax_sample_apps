@@ -69,7 +69,6 @@ class GymEnv(object):
         env_name = self.__camel_to_underscore(env)
         if any(env_name.startswith(item) for item in GymEnv.AtariGameList):
             self._process_state = self._process_img
-            print(env_name)
 
         self.action_size = self._get_action_size()
         if self.action_size != options.algorithm.output.action_size:
