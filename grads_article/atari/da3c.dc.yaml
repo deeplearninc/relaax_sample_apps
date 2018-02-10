@@ -78,4 +78,4 @@ algorithm:
   combine_gradients: dc           # gradient's combining method: dc | fifo | average
   dc_adaptive: true
   dc_lambda: 2.0
-  dc_m: 0.8
+  # dc_m: 0.8

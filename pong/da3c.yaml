@@ -58,5 +58,4 @@ algorithm:
   optimizer: Adam                 # type of optimizer to use: Adam | RMSProp
   gradients_norm_clipping: 40.    # value to clip the gradients by its global norm
 
-  combine_gradient: dc            # gradient's combining method: dc | fifo | average
-  dc_lambda: 0.05                 # delay compensation regularization constant
+  combine_gradients: fifo         # gradient's combining method: dc | fifo | average
