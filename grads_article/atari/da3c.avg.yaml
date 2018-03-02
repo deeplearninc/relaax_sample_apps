@@ -77,3 +77,4 @@ algorithm:
 
   combine_gradients: avg          # gradient's combining method: dc | fifo | average
   num_gradients: 4                # test: 2, 4, 6, 8, 16
+  reject_old: true                # set to True to nod incorporate delayed gradients in averaging
